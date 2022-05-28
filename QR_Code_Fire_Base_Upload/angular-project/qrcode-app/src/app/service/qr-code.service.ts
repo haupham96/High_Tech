@@ -16,8 +16,8 @@ export class QrCodeService {
     return this.http.get<any>(`${this.URL}/encode`);
   }
 
-  decode(type: string, formData: FormData, link: string): Observable<Product> {
-    return this.http.post<Product>(`${this.URL}/decode?type=${type}&link=${link}`, formData);
+  decode(formData: FormData): Observable<Product> {
+    return this.http.post<Product>(`${this.URL}/decode`, formData);
   }
 
   check2QRCodes(formData: FormData): Observable<any> {

@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CategoryService} from "../service/category.service";
+import {ProductService} from "../service/product.service";
+import {Category} from "../model/category";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Product} from "../model/product";
+import {AngularFireStorage} from "@angular/fire/storage";
+import {finalize} from "rxjs/operators";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-product',
@@ -7,9 +15,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateProductComponent implements OnInit {
 
-  constructor() { }
+  path = "/PD-";
+  product: Product = {};
+  categories: Category[] = [];
+
+  productForm = new FormGroup({
+    name: new FormControl('', Validators.required),
+    price: new FormControl('', Validators.required),
+    category: new FormControl()
+  });
+
+  constructor(private categoryService: CategoryService,
+              private productService: ProductService,
+              private storage: AngularFireStorage,
+              private router: Router) {
+    this.categoryService.getAllCategory().subscribe(
+      data => {
+        this.categories = data;
+        this.productForm.get('category').setValue(this.categories[0]);
+        this.productForm.get('category').setValidators(Validators.required);
+        this.productForm.get('category').updateValueAndValidity();
+      }
+    )
+  }
 
   ngOnInit(): void {
   }
 
+  createProduct() {
+    if (this.productForm.valid) {
+      this.product = this.productForm.value;
+      this.productService.createProduct(this.product).subscribe(data => {
+        this.productService.getLatestProduct().subscribe(id => {
+          this.path += id;
+          this.storage.upload(this.path, data).snapshotChanges().subscribe()
+        })
+      }, err => {
+        console.log(err)
+      }, () => {
+        this.router.navigate(['/list-product']);
+      })
+    }
+  }
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from "../service/product.service";
 import {Product} from "../model/product";
+import {QrCodeService} from "../service/qr-code.service";
 
 @Component({
   selector: 'app-list-product',
@@ -10,8 +11,10 @@ import {Product} from "../model/product";
 export class ListProductComponent implements OnInit {
   products: Product[] = [];
 
-  constructor(private productService: ProductService) {
-    
+  scanType = "SCAN";
+
+  constructor(private productService: ProductService, private qrCodeService: QrCodeService) {
+
     this.productService.getAllProducts().subscribe(data => {
       this.products = data.content;
     }, error => {
@@ -23,4 +26,29 @@ export class ListProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  scanCode() {
+    let inputs: any = document.querySelectorAll("input[type='file']");
+    if (this.scanType === 'SCAN') {
+      let formData = new FormData();
+      formData.append('file', inputs[0].files[0]);
+      this.qrCodeService.decode(formData).subscribe(data => {
+        console.log(data);
+      }, err => {
+        console.log(err)
+      })
+    }
+
+    if (this.scanType === 'CHECK') {
+      let formData = new FormData();
+      for (let i = 0; i < inputs.length; i++) {
+        formData.append('file' + (i + 1), inputs[i].files[0]);
+      }
+      this.qrCodeService.check2QRCodes(formData).subscribe(data => {
+        console.log(data);
+      }, err => {
+        console.log(err);
+      })
+    }
+
+  }
 }

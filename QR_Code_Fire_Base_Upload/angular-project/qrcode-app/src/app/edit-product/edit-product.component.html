@@ -1,1 +1,42 @@
-<p>edit-product works!</p>
+<div style="background-color: rgba(255,255,255,0.76); width: 100vw; height: 100vh">
+  <div class="container">
+    <div class="row">
+      <div class="col-6 mx-auto">
+        <form [formGroup]="productForm" (ngSubmit)="editProduct()">
+
+          <h4 style="text-align: center" class="cyan-text pt-5">CREATE PRODUCT</h4>
+
+          <div class="modal-body">
+
+            <div class="form-group">
+              <label><strong>Name</strong></label>
+              <input id="name" type="text" class="form-control" formControlName="name">
+            </div>
+
+            <div class="form-group">
+              <label><strong>Price</strong></label>
+              <input type="text" class="form-control" formControlName="price">
+            </div>
+
+            <div class="form-group">
+              <label><strong>Category</strong></label>
+              <select [compareWith]="compare" class="browser-default custom-select" aria-label="Default select example"
+                      formControlName="category">
+                <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
+              </select>
+              <br>
+            </div>
+
+            <div class="modal-footer">
+              <a [routerLink]="['/list-product']" class="btn btn-dark">Cancel</a>
+              <button class="btn btn-primary" [disabled]="!productForm.valid"
+                      type="submit">
+                Edit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

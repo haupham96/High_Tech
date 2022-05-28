@@ -54,54 +54,31 @@ public class QRCodeRestController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping(value = "/decode", consumes = {"multipart/form-data"})
-    public ResponseEntity<Product> decodeQRCode(@RequestParam Optional<String> type,
-                                                @RequestBody(required = false) MultipartFile file,
-                                                @RequestParam(required = false, defaultValue = "") String link) {
-        if (!type.isPresent()) {
+    @PostMapping(value = "/decode", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Product> decodeQRCode(@RequestBody(required = false) MultipartFile file) {
+
+        try {
+            BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
+            Product product = QRCodeUtils.decode(bufferedImage);
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        String typeOfCode = type.get();
 
-        if (typeOfCode.equals("LINK")) {
-            if (!link.equals("")) {
-                try {
-                    BufferedImage bufferedImage = ImageIO.read(new URL(link));
-                    Product product = QRCodeUtils.decode(bufferedImage);
-                    return new ResponseEntity<>(product, HttpStatus.OK);
-                } catch (IOException e) {
-                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-                }
-            } else {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-
-
-        } else if (typeOfCode.equals("FILE")) {
-            try {
-                BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
-                Product product = QRCodeUtils.decode(bufferedImage);
-                return new ResponseEntity<>(product, HttpStatus.OK);
-            } catch (IOException e) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
     }
 
-    @PostMapping(value = "/check", consumes = {"multipart/form-data"})
-    public ResponseEntity<String> check2Codes(@RequestBody MultipartFile file1, @RequestBody MultipartFile file2) {
+    @PostMapping(value = "/check", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Boolean> check2Codes(@RequestBody MultipartFile file1, @RequestBody MultipartFile file2) {
         try {
             BufferedImage bf1 = ImageIO.read(file1.getInputStream());
             BufferedImage bf2 = ImageIO.read(file2.getInputStream());
             if (QRCodeUtils.check2QRCode(bf1, bf2)) {
-                return new ResponseEntity<>("VALID", HttpStatus.OK);
+                return new ResponseEntity<>(true, HttpStatus.OK);
             } else {
-                return new ResponseEntity<>("INVALID", HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(false, HttpStatus.OK);
             }
         } catch (IOException e) {
-            return new ResponseEntity<>("INVALID", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
         }
     }
 

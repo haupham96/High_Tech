@@ -32,7 +32,7 @@ public class ProductRestController {
 
     @GetMapping("")
     public ResponseEntity<Page<Product>> pageProduct(Pageable pageable) {
-        Page<Product> products = this.iProductService.findAll(PageRequest.of(pageable.getPageNumber(), 5));
+        Page<Product> products = this.iProductService.findAll(PageRequest.of(pageable.getPageNumber(), 100));
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
@@ -46,9 +46,9 @@ public class ProductRestController {
     }
 
     @GetMapping("/latest")
-    public ResponseEntity<Product> getLatestProduct() {
+    public ResponseEntity<Integer> getLatestProduct() {
         Product product = this.iProductService.getLatestProduct();
-        return new ResponseEntity<>(product, HttpStatus.OK);
+        return new ResponseEntity<>(product.getId(), HttpStatus.OK);
     }
 
     @PostMapping(value = "", produces = "image/png")

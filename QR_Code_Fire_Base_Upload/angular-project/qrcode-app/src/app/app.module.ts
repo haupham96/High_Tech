@@ -9,6 +9,7 @@ import { CreateProductComponent } from './create-product/create-product.componen
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { ListProductComponent } from './list-product/list-product.component';
 import {HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -17,12 +18,14 @@ import {HttpClientModule} from "@angular/common/http";
     EditProductComponent,
     ListProductComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        ReactiveFormsModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
