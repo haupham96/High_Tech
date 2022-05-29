@@ -60,7 +60,7 @@ export class EditProductComponent implements OnInit {
     if (this.productForm.valid) {
       this.product = this.productForm.value;
       this.productService.editProduct(this.product).subscribe(image => {
-        this.path += this.product.id;
+        this.path += this.product.id + ".png";
         this.storage.upload(this.path, image).snapshotChanges().subscribe(
           () => {
             this.router.navigate(['/list-product']);

@@ -9,16 +9,18 @@ import {QrCodeService} from "../service/qr-code.service";
   styleUrls: ['./list-product.component.css']
 })
 export class ListProductComponent implements OnInit {
-  products: Product[] = [];
+  products: Product[] = []
 
   scanType = "SCAN";
+
+  link = '';
 
   constructor(private productService: ProductService, private qrCodeService: QrCodeService) {
 
     this.productService.getAllProducts().subscribe(data => {
       this.products = data.content;
-    }, error => {
-      console.log(error);
+    }, err => {
+      console.log(err);
     })
 
   }
@@ -50,5 +52,22 @@ export class ListProductComponent implements OnInit {
       })
     }
 
+    if (this.scanType === 'LINK') {
+      this.qrCodeService.encodeLink(this.link).subscribe(next => {
+        console.log(next);
+      }, err => {
+        console.log(err);
+      })
+    }
+
+  }
+
+  deleteProduct(id: number) {
+    this.productService.deleteProduct(id).subscribe(
+      () => {
+        window.location.reload();
+        alert('success!')
+      }
+    );
   }
 }

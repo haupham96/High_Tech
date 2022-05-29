@@ -18,16 +18,16 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let pro of products">
-    <td>{{pro.id}}</td>
-    <td>{{pro.name}}</td>
-    <td>{{pro.price}}</td>
-    <td>{{pro.category.name}}</td>
+  <tr *ngFor="let product of products">
+    <td>{{product.id}}</td>
+    <td>{{product.name}}</td>
+    <td>{{product.price}}</td>
+    <td>{{product.category.name}}</td>
     <td>
-      <button [routerLink]="['/edit-product',pro.id]" class="btn btn-primary">Edit</button>
+      <button [routerLink]="['/edit-product',product.id]" class="btn btn-primary">Edit</button>
     </td>
     <td>
-      <button class="btn btn-danger">Delete</button>
+      <button class="btn btn-danger" (click)="deleteProduct(product.id)">Delete</button>
     </td>
   </tr>
   </tbody>
@@ -51,21 +51,26 @@
             <td>Select Scan Type</td>
             <td>
               <select [(ngModel)]="scanType" class="form-control" aria-label="Default select example">
+                <option value="LINK">Scan LINK QR CODE</option>
                 <option value="SCAN">Scan QR Code</option>
                 <option value="CHECK">Check QR Code</option>
               </select></td>
           </tr>
           <tr *ngIf="scanType ==='SCAN'">
             <td>Choose Code</td>
-            <td><input type="file" #scan></td>
+            <td><input type="file"></td>
           </tr>
           <tr *ngIf="scanType ==='CHECK'">
             <td>Choose Code 1</td>
-            <td><input type="file" #check1></td>
+            <td><input type="file"></td>
           </tr>
           <tr *ngIf="scanType ==='CHECK'">
             <td>Choose Code 2</td>
-            <td><input type="file" #check2></td>
+            <td><input type="file"></td>
+          </tr>
+          <tr *ngIf="scanType ==='LINK'">
+            <td>Input Link</td>
+            <td><input type="text" [(ngModel)]="link"></td>
           </tr>
         </table>
       </div>

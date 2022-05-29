@@ -46,9 +46,9 @@ public class ProductRestController {
     }
 
     @GetMapping("/latest")
-    public ResponseEntity<Integer> getLatestProduct() {
+    public ResponseEntity<Product> getLatestProduct() {
         Product product = this.iProductService.getLatestProduct();
-        return new ResponseEntity<>(product.getId(), HttpStatus.OK);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     @PostMapping(value = "", produces = "image/png")

@@ -12,6 +12,10 @@ export class QrCodeService {
   constructor(private http: HttpClient) {
   }
 
+  encodeLink(link: string): Observable<Product> {
+    return this.http.get<Product>(`${this.URL}/link?link=${link}`)
+  }
+
   encode(product: Product): Observable<any> {
     return this.http.get<any>(`${this.URL}/encode`);
   }

@@ -7,6 +7,8 @@ import {Product} from "../model/product";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
 import {Router} from "@angular/router";
+import {QrCode} from "../model/qr-code";
+import {QrCodeService} from "../service/qr-code.service";
 
 @Component({
   selector: 'app-create-product',
@@ -18,6 +20,7 @@ export class CreateProductComponent implements OnInit {
   path = "/PD-";
   product: Product = {};
   categories: Category[] = [];
+  qrCode: QrCode = {};
 
   productForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -25,7 +28,8 @@ export class CreateProductComponent implements OnInit {
     category: new FormControl()
   });
 
-  constructor(private categoryService: CategoryService,
+  constructor(private qrCodeService: QrCodeService,
+              private categoryService: CategoryService,
               private productService: ProductService,
               private storage: AngularFireStorage,
               private router: Router) {
@@ -44,16 +48,18 @@ export class CreateProductComponent implements OnInit {
 
   createProduct() {
     if (this.productForm.valid) {
-      this.product = this.productForm.value;
+      this.product = Object.assign({}, this.productForm.value);
       this.productService.createProduct(this.product).subscribe(data => {
-        this.productService.getLatestProduct().subscribe(id => {
-          this.path += id;
-          this.storage.upload(this.path, data).snapshotChanges().subscribe()
+        let img = data;
+        this.productService.getLatestProduct().subscribe(data => {
+          this.product = data;
+          this.path += this.product.id + ".png";
+          this.storage.upload(this.path, img).snapshotChanges().subscribe(()=>{
+            this.router.navigate(['/'])
+          })
         })
       }, err => {
         console.log(err)
-      }, () => {
-        this.router.navigate(['/list-product']);
       })
     }
   }

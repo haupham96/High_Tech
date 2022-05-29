@@ -19,9 +19,6 @@ public class Product {
     private String name;
     private String price;
 
-    @Column(columnDefinition = "LONGTEXT")
-    private String qrCode;
-
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
