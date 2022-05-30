@@ -7,7 +7,6 @@ import {Product} from "../model/product";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
 import {Router} from "@angular/router";
-import {QrCode} from "../model/qr-code";
 import {QrCodeService} from "../service/qr-code.service";
 
 @Component({
@@ -20,7 +19,6 @@ export class CreateProductComponent implements OnInit {
   path = "/PD-";
   product: Product = {};
   categories: Category[] = [];
-  qrCode: QrCode = {};
 
   productForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -54,7 +52,7 @@ export class CreateProductComponent implements OnInit {
         this.productService.getLatestProduct().subscribe(data => {
           this.product = data;
           this.path += this.product.id + ".png";
-          this.storage.upload(this.path, img).snapshotChanges().subscribe(()=>{
+          this.storage.upload(this.path, img).snapshotChanges().subscribe(() => {
             this.router.navigate(['/'])
           })
         })

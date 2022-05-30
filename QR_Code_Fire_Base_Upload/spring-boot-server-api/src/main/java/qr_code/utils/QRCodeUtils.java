@@ -10,7 +10,9 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import qr_code.model.Product;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Hashtable;
@@ -24,8 +26,10 @@ public class QRCodeUtils {
         hashtable.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 
         try {
+
             ObjectMapper objectMapper = new ObjectMapper();
             String jsonProduct = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(product);
+
             BitMatrix bitMatrix = new MultiFormatWriter().encode(jsonProduct, BarcodeFormat.QR_CODE, 500, 500, hashtable);
             MatrixToImageWriter.writeToPath(bitMatrix, "png", Paths.get(path));
             return path;
@@ -45,6 +49,7 @@ public class QRCodeUtils {
             Result rs = new MultiFormatReader().decode(binaryBitmap);
             ObjectMapper mapper = new ObjectMapper();
             Product product = mapper.readValue(rs.getText(), Product.class);
+
             return product;
         } catch (NotFoundException e) {
             e.printStackTrace();
