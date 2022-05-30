@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>charjs</title>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+</head>
+<body>
+<canvas id="singleLine" style="width: 100%;max-width: 700px"></canvas>
+
+<canvas id="barChart" style="width: 100%;max-width: 700px"></canvas>
+
+<canvas id="multiLineChart" style="width: 100%;max-width: 700px"></canvas>
+
+<canvas id="pie" style="width: 100%;max-width: 700px"></canvas>
+
+<canvas id="doughnut" style="width: 100%;max-width: 700px"></canvas>
+</body>
+<script>
+
+    let x3 = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+    let y3 = [800, 700, 0];
+
+
+    let xValues = ["Vietnam", "China", "USA", "England", "Thailand"];
+    let yValues = [55, 49, 44, 24, 15, 0];
+    let barColors = ["red", "green", "blue", "brown", "orange"];
+
+    new Chart("barChart", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            legend:{
+                display:false
+            }, title:{
+                display:true,
+                text:"BAR CHART"
+            }
+        }
+
+    });
+
+    let xVal = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+    let yVal1 = [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478];
+    let yVal2 = [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000];
+    let yVal3 = [300, 700, 2000, 5000, 6000, 4000, 2000, 1000, 200, 100];
+
+    new Chart("multiLineChart", {
+        type: "line",
+        data: {
+            labels: xVal,
+            datasets: [
+                {
+                    label: "RED",
+                    fill: false,
+                    pointRadius: 4,
+                    pointBackgroundColor: "black",
+                    borderColor: "red",
+                    data: yVal1
+                },
+                {
+                    label: "GREEN",
+                    fill: false,
+                    borderColor: "green",
+                    pointBackgroundColor: "black",
+                    pointRadius: 4,
+                    data: yVal2
+                },
+                {
+                    label: "BLUE",
+                    fill: false,
+                    pointRadius: 4,
+                    pointBackgroundColor: "black",
+                    borderColor: "blue",
+                    data: yVal3
+                }
+            ]
+        }
+    })
+
+    let barColorsPie = ["red", "green", "blue", "brown", "orange"];
+    let yValuePie = [55, 49, 44, 24, 15, 0];
+    let xValuePie = ["Vietnam", "China", "USA", "England", "Thailand"];
+
+    new Chart("pie", {
+        type: "pie",
+        data: {
+            labels: xValuePie,
+            datasets: [{
+                backgroundColor: barColorsPie,
+                data: yValuePie
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "PIE TITLE"
+            }
+        }
+    })
+
+    let barColorsDoughnut = ["red", "green", "blue", "brown", "orange"];
+    let yValueDoughnut = [55, 49, 44, 24, 15, 0];
+    let xValueDoughnut = ["Vietnam", "China", "USA", "England", "Thailand"];
+
+    new Chart("doughnut", {
+        type: "doughnut",
+        data: {
+            labels: xValueDoughnut,
+            datasets: [{
+                backgroundColor: barColorsDoughnut,
+                data: yValueDoughnut
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "DOUGHNUT TITLE"
+            }
+        }
+    })
+
+
+    let ySingleLine = [55, 49, 44, 24, 15, 0];
+    let xSingleLine = ["Vietnam", "China", "USA", "England", "Thailand"];
+    new Chart("singleLine", {
+        type: "line",
+        data: {
+            labels: xSingleLine,
+            datasets: [{
+                data: ySingleLine,
+                borderColor: "blue",
+                fill:false,
+                tension: 0.1
+            }]
+        },
+        options: {
+            legend:{
+                display:false
+            }
+        }
+    });
+</script>
+</html>
