@@ -97,13 +97,13 @@ export class TestingComponent implements OnInit {
           label: "Line Chart",
           data: this.lineDatas,
           backgroundColor: "red",
-          tension: 0.1,
+          tension: 0.5,
           borderColor: 'red'
         }]
       },
       options: {
         plugins: {
-          legend: {display: true}
+          legend: {display: false}
         }
       }
     });

@@ -58,19 +58,27 @@
           </tr>
           <tr *ngIf="scanType ==='SCAN'">
             <td>Choose Code</td>
-            <td><input type="file"></td>
+            <td><input type="file" (change)="displayImage($event)"></td>
           </tr>
           <tr *ngIf="scanType ==='CHECK'">
             <td>Choose Code 1</td>
-            <td><input type="file"></td>
+            <td><input type="file" (change)="displayImage($event)"></td>
           </tr>
           <tr *ngIf="scanType ==='CHECK'">
             <td>Choose Code 2</td>
-            <td><input type="file"></td>
+            <td><input type="file" (change)="displayImage2($event)"></td>
           </tr>
           <tr *ngIf="scanType ==='LINK'">
             <td>Input Link</td>
-            <td><input type="text" [(ngModel)]="link"></td>
+            <td><input type="text" (change)="displayUrl()" [(ngModel)]="link"></td>
+          </tr>
+          <tr>
+            <td>QR CODE 1</td>
+            <td><img width="100px" height="100px" id="image1"></td>
+          </tr>
+          <tr *ngIf="scanType === 'CHECK'">
+            <td>QR CODE 2</td>
+            <td><img width="100px" height="100px" id="image2"></td>
           </tr>
         </table>
       </div>
