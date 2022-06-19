@@ -1,0 +1,25 @@
+<p>{{response.id}}</p>
+<p>{{response.username}}</p>
+<p>{{response.roles}}</p>
+
+<form [formGroup]="formLogin" (ngSubmit)="submit()">
+  <table>
+    <tr>
+      <td>user name :</td>
+      <td><input type="text" formControlName="username"></td>
+    </tr>
+    <tr>
+      <td>password</td>
+      <td><input type="text" formControlName="password"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <button type="submit">Login</button>
+      </td>
+    </tr>
+  </table>
+</form>
+
+<button (click)="hello()">Hello</button>
+<button (click)="logout()">Logout</button>
