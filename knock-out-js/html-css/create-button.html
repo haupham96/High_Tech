@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Button</title>
+    <style>
+        .content {
+            margin: 200px;
+        }
+
+        .btn {
+            min-width: 120px;
+            display: inline-block;
+            text-decoration: none;
+            background: transparent;
+            border: none;
+            outline: none;
+            color:#fff;
+            padding: 12px 48px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: opacity 0.2s linear;
+        }
+        .btn:hover{
+            opacity: 0.8;
+        }
+        .btn + .btn {
+            margin-left: 16px;
+        }
+
+        .btn--disabled{
+            opacity: 0.5 !important;
+            cursor: default;
+        }
+
+        .btn--success {
+            background: #71be34;
+        }
+
+        .btn--warn {
+            background: #ffb702;
+        }
+
+        .btn--danger {
+            background: #ff623d;
+        }
+
+        .btn-size-medium{
+            padding: 16px 52px;
+        }
+
+        .btn-size-large{
+            padding: 20px 56px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="content">
+    <button class="btn btn--success btn--disabled">GO TO NEXT APPROVAL</button>
+    <button class="btn btn--warn">OK</button>
+    <button class="btn btn--danger">TRY AGAIN</button>
+</div>
+<div class="content">
+    <button class="btn btn--success btn-size-medium">GO TO NEXT APPROVAL</button>
+    <button class="btn btn--warn btn-size-medium">OK</button>
+    <button class="btn btn--danger btn-size-medium">TRY AGAIN</button>
+</div>
+<div class="content">
+    <button class="btn btn--success btn-size-large">GO TO NEXT APPROVAL</button>
+    <button class="btn btn--warn btn-size-large">OK</button>
+    <button class="btn btn--danger btn-size-large">TRY AGAIN</button>
+</div>
+
+</body>
+</html>
