@@ -10,17 +10,6 @@
   "editor.fontFamily": "SF Mono, 'Courier New', monospace,Dank Mono",
   "editor.fontLigatures": true,
   "terminal.integrated.localEchoStyle": "dim",
-  // "indentRainbow.colors": [
-  //   "rgba(24, 78, 119,0.15)",
-  //   "rgba(30, 96, 145,0.15)",
-  //   "rgba(26, 117, 159, 0.15)",
-  //   "rgba(22, 138, 173,0.15)",
-  //   "rgba(52, 160, 164,0.15)",
-  //   "rgba(82, 182, 154,0.15)",
-  //   "rgba(82, 182, 154,0.1)",
-  //   "rgba(82, 182, 154,0.05)",
-  //   "rgba(82, 182, 154,0.025)"
-  // ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.autoSave": "afterDelay",
   "editor.fontSize": 15,
@@ -32,5 +21,31 @@
   "editor.cursorWidth": 1,
   "vscode_custom_css.imports": ["file:///D://VSCode/VSCodeCustom.css"],
   "markdown.preview.fontSize": 15,
-  "emmet.triggerExpansionOnTab": true
+  "emmet.triggerExpansionOnTab": true,
+  "editor.inlineSuggest.enabled": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "vue-html": "html"
+  },
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "eslint.alwaysShowStatus": true,
+  "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "indentRainbow.colors": [
+    "rgba(3, 4, 94,0.15)",
+    "rgba(2, 62, 138,0.15)",
+    "rgba(0, 119, 182, 0.15)",
+    "rgba(0, 150, 199,0.15)",
+    "rgba(0, 180, 216,0.15)",
+    "rgba(72, 202, 228,0.15)",
+    "rgba(144, 224, 239,0.15)",
+    "rgba(144, 224, 239,0.1)",
+    "rgba(144, 224, 239,0.05)",
+    "rgba(144, 224, 239,0.025)"
+  ],
+  "indentRainbow.ignoreErrorLanguages": ["*"],
+  "indentRainbow.colorOnWhiteSpaceOnly": true
 }
