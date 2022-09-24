@@ -44,6 +44,8 @@ public class JwtRestController {
     @Autowired
     PasswordEncoder encoder;
 
+    // eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYXUxMjMiLCJpYXQiOjE2NTcwODM0NDgsImV4cCI6MTY1NzA5MjA4OH0.N-7eycXPjPgGEAiPmYxDZpwNsblAonVVrd92IFnnsqg
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody JwtRequest request) {
         Authentication authentication = authenticationManager.authenticate(
