@@ -47,5 +47,12 @@
     "rgba(144, 224, 239,0.025)"
   ],
   "indentRainbow.ignoreErrorLanguages": ["*"],
-  "indentRainbow.colorOnWhiteSpaceOnly": true
+  "indentRainbow.colorOnWhiteSpaceOnly": true,
+  "editor.linkedEditing": true,
+  "editor.tabSize": 2,
+  "editor.tabCompletion": "on",
+  "prettier.singleQuote": true,
+  "workbench.tree.indent": 15,
+  "editor.lineHeight": 30,
+  "terminal.integrated.defaultProfile.windows": "Git Bash"
 }
