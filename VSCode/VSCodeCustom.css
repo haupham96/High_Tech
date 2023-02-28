@@ -27,7 +27,8 @@
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   -webkit-font-smoothing: auto;
-  font-family: "Dank mono", monospace;
+  font-family: 'Dank mono', monospace;
+  font-style: italic;
   font-size: 15px;
 }
 .mtk26 {
